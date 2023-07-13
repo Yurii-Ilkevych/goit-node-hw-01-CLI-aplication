@@ -1,5 +1,7 @@
 const path = require("path");
 
+const { v1: uuidv1 } = require("uuid");
+
 const fs = require("fs").promises;
 
 const contactsPath = path.resolve("./db/contacts.json");
@@ -61,8 +63,8 @@ function doDelete(remainedContacts) {
 }
 
 function addContact(name, email, phone) {
-  // ...твій код. Повертає об'єкт доданого контакту.
-  const newContact = { name, email, phone };
+const id = uuidv1()
+  const newContact = {id, name, email, phone };
 
   fs.readFile(contactsPath)
     .then((data) => {

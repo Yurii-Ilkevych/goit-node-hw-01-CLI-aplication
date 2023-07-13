@@ -1,6 +1,7 @@
 {
   "name": "goit-node-hw-01-cli-aplication",
   "version": "1.0.0",
+  "type": "commonjs",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -26,6 +27,6 @@
   },
   "dependencies": {
     "commander": "^11.0.0",
-    "nanoid": "^4.0.2"
+    "uuid": "^9.0.0"
   }
 }
