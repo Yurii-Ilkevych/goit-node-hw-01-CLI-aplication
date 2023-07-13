@@ -1,0 +1,31 @@
+{
+  "name": "goit-node-hw-01-cli-aplication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "Test",
+    "start": "node",
+    "dev": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yurii-Ilkevych/goit-node-hw-01-CLI-aplication.git"
+  },
+  "keywords": [
+    "cli-app"
+  ],
+  "author": "Yurii Ilkevych",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yurii-Ilkevych/goit-node-hw-01-CLI-aplication/issues"
+  },
+  "homepage": "https://github.com/Yurii-Ilkevych/goit-node-hw-01-CLI-aplication#readme",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "nanoid": "^4.0.2"
+  }
+}
