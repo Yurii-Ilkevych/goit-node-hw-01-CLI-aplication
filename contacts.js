@@ -6,52 +6,52 @@ const fs = require("fs").promises;
 
 const contactsPath = path.resolve("./db/contacts.json");
 
-function listContacts() {
-  fs.readFile(contactsPath)
-    .then((data) => {
-      console.table(JSON.parse(data.toString()));
+async function listContacts() {
+  try {
+    const response = await fs.readFile(contactsPath);
+    console.table(JSON.parse(response.toString()));
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+async function getContactById(contactId) {
+  try {
+    const response = await fs.readFile(contactsPath);
+    const contacts = JSON.parse(response.toString());
+    const foundedContact = contacts.filter(
+      (contact) => contact.id === contactId
+    );
+    if (foundedContact.length >= 1) {
+      console.log(foundedContact);
       return;
-    })
-    .catch((error) => console.log(console.log("404")));
+    } else {
+      console.log(null);
+      return;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
-function getContactById(contactId) {
-  fs.readFile(contactsPath)
-    .then((data) => {
-      const contacts = JSON.parse(data.toString());
-      const foundedContact = contacts.filter(
-        (contact) => contact.id === contactId
-      );
-      if (foundedContact.length >= 1) {
-        console.log(foundedContact);
-        return;
-      } else {
-        console.log(null);
-        return;
-      }
-    })
-    .catch((error) => console.log(console.log("404")));
-}
-
-function removeContact(contactId) {
-  fs.readFile(contactsPath)
-    .then((data) => {
-      const contacts = JSON.parse(data.toString());
-      const remainedContacts = contacts.filter(
-        (contact) => contact.id !== contactId
-      );
-      if (contacts.length !== remainedContacts.length) {
-        deletedContact = contacts.filter((contact) => contact.id === contactId);
-
-        doDelete(remainedContacts);
-        console.log(contacts.filter((contact) => contact.id === contactId));
-        return;
-      } else {
-        console.log(null);
-        return;
-      }
-    })
-    .catch((error) => console.log("404"));
+async function removeContact(contactId) {
+  try {
+    const response = await fs.readFile(contactsPath);
+    const contacts = JSON.parse(response.toString());
+    const remainedContacts = contacts.filter(
+      (contact) => contact.id !== contactId
+    );
+    if (contacts.length !== remainedContacts.length) {
+      doDelete(remainedContacts);
+      console.log(contacts.filter((contact) => contact.id === contactId));
+      return;
+    } else {
+      console.log(null);
+      return;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 function doDelete(remainedContacts) {
@@ -62,23 +62,21 @@ function doDelete(remainedContacts) {
   }
 }
 
-function addContact(name, email, phone) {
-const id = uuidv1()
-  const newContact = {id, name, email, phone };
+async function addContact(name, email, phone) {
+  const id = uuidv1();
+  const newContact = { id, name, email, phone };
 
-  fs.readFile(contactsPath)
-    .then((data) => {
-      const allContacts = JSON.parse(data.toString());
-
-      doWrite(newContact, allContacts);
-      return;
-    })
-    .catch((error) => console.log(console.log("404")));
+  try {
+    const response = await fs.readFile(contactsPath);
+    const allContacts = JSON.parse(response.toString());
+    doWrite(newContact, allContacts);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 function doWrite(newContact, allContacts) {
   allContacts.push(newContact);
-
   try {
     fs.writeFile(contactsPath, JSON.stringify(allContacts));
     console.log(newContact);
