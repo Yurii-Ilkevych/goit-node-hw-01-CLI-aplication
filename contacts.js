@@ -39,7 +39,7 @@ async function removeContact(contactId) {
 }
 
 function doDelete(remainedContacts) {
-    fs.writeFile(contactsPath, JSON.stringify(remainedContacts));
+    fs.writeFile(contactsPath, JSON.stringify(remainedContacts, null, 2));
 }
 
 async function addContact(name, email, phone) {
@@ -53,7 +53,7 @@ async function addContact(name, email, phone) {
 
 function doWrite(newContact, allContacts) {
   allContacts.push(newContact);
-    fs.writeFile(contactsPath, JSON.stringify(allContacts));
+    fs.writeFile(contactsPath, JSON.stringify(allContacts, null, 2));
     return newContact || null;
 }
 
