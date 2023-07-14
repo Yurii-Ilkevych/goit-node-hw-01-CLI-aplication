@@ -9,9 +9,9 @@ const contactsPath = path.resolve("./db/contacts.json");
 async function listContacts() {
   try {
     const response = await fs.readFile(contactsPath);
-    console.table(JSON.parse(response.toString()));
+    return JSON.parse(response.toString());
   } catch (error) {
-    console.log(error.message);
+    return error.message;
   }
 }
 
@@ -23,14 +23,12 @@ async function getContactById(contactId) {
       (contact) => contact.id === contactId
     );
     if (foundedContact.length >= 1) {
-      console.log(foundedContact);
-      return;
+      return foundedContact;
     } else {
-      console.log(null);
-      return;
+      return null;
     }
   } catch (error) {
-    console.log(error.message);
+    return error.message;
   }
 }
 
@@ -43,14 +41,12 @@ async function removeContact(contactId) {
     );
     if (contacts.length !== remainedContacts.length) {
       doDelete(remainedContacts);
-      console.log(contacts.filter((contact) => contact.id === contactId));
-      return;
+      return contacts.filter((contact) => contact.id === contactId);
     } else {
-      console.log(null);
-      return;
+      return null;
     }
   } catch (error) {
-    console.log(error.message);
+    return error.message;
   }
 }
 
@@ -69,9 +65,9 @@ async function addContact(name, email, phone) {
   try {
     const response = await fs.readFile(contactsPath);
     const allContacts = JSON.parse(response.toString());
-    doWrite(newContact, allContacts);
+    return doWrite(newContact, allContacts);
   } catch (error) {
-    console.log(error.message);
+    return error.message;
   }
 }
 
@@ -79,7 +75,7 @@ function doWrite(newContact, allContacts) {
   allContacts.push(newContact);
   try {
     fs.writeFile(contactsPath, JSON.stringify(allContacts));
-    console.log(newContact);
+    return newContact;
   } catch (error) {
     console.log("404");
   }
