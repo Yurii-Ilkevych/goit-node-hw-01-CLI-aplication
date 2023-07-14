@@ -32,7 +32,7 @@ async function removeContact(contactId) {
     );
     if (contacts.length !== remainedContacts.length) {
       doDelete(remainedContacts);
-      return contacts.filter((contact) => contact.id === contactId);
+      return contacts.filter((contact) => contact.id === contactId) || null;
     } else {
       return null;
     }
